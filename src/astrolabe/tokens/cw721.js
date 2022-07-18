@@ -73,13 +73,17 @@ const getCW721TokenBalance = async ({keplrAccount, tokenAddress, network, extra}
 }
 
 const isCW721 = async (tokenAddress, network) => {
-  let tokenInfo = await getTokenInfo({tokenAddress, network})
-  // Expecting this format for tokenInfo.token:
-  // { name: 'Passage Marketplace', symbol: 'yawp' }
-  return tokenInfo.token &&
-    Object.keys(tokenInfo.token).length === 2 &&
-    tokenInfo.token.hasOwnProperty('name') &&
-    tokenInfo.token.hasOwnProperty('symbol');
+  try {
+    let tokenInfo = await getTokenInfo({tokenAddress, network})
+    // Expecting this format for tokenInfo.token:
+    // { name: 'Passage Marketplace', symbol: 'yawp' }
+    return tokenInfo.token &&
+        Object.keys(tokenInfo.token).length === 2 &&
+        tokenInfo.token.hasOwnProperty('name') &&
+        tokenInfo.token.hasOwnProperty('symbol');
+  } catch (e) {
+    return false
+  }
 }
 
 module.exports = {

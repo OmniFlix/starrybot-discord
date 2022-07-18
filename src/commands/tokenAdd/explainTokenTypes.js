@@ -26,6 +26,11 @@ module.exports = {
           next: 'addCW721',
         },
         {
+          emoji: '🔥',
+          description: 'An Omniflix non-fungible token',
+          next: 'addONFT',
+        },
+        {
           emoji: '⁉',
           description: 'Huh? I\'m confused.',
           next: 'explainTokenTypes',

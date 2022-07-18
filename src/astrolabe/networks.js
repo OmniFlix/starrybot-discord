@@ -27,7 +27,14 @@ function getPrefixFromToken(tokenAddress) {
  * tokenAddress — e.g. "juno1w2sr3vz0xg9kj82kumd7j7a5736wfklqtnctx0frdj26kclctleqvzx2ly"
  */
 function getConnectionFromToken(tokenAddress, connType, network) {
-    const prefix = getPrefixFromToken(tokenAddress)
+    let prefix;
+    if (tokenAddress && tokenAddress.startsWith('onftdenom')) {
+      prefix = 'omniflix'
+    } else if (tokenAddress){
+      prefix = getPrefixFromToken(tokenAddress)
+    } else {
+      throw 'Could not find prefix'
+    }
     if (networkPrefixes.includes(prefix)) {
       return getConnectionFromPrefix(prefix, connType, network)
     } else {
