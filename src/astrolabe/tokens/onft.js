@@ -52,6 +52,9 @@ const getStakedONFTTokenBalance = async ({keplrAccount, tokenAddress, network, e
 const getONFTTokenBalance = async ({keplrAccount, tokenAddress, network, extra}) => {
     // Given the wallet address, NFT collection address,
     // and the network it's on, do the math for the following correctly
+    if (!keplrAccount || !tokenAddress || !network) {
+        return 0
+    }
     const decodedAccount = Bech32.decode(keplrAccount).data;
     const prefix = getPrefixFromToken(tokenAddress);
     if (!prefix) throw 'Could not determine prefix';

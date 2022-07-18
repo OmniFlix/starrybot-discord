@@ -12,6 +12,9 @@ try {
 }
 
 function getPrefixFromToken(tokenAddress) {
+    if (tokenAddress.startsWith('onftdenom')) {
+        return 'omniflix'
+    }
   let ret;
   const decodedAccount = Bech32.decode(tokenAddress);
   if (decodedAccount && decodedAccount.prefix) {

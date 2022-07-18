@@ -45,6 +45,7 @@ const getTokenDetails = async ({tokenAddress, network}) => {
 
 const getTokenBalance = async ({keplrAccount, tokenAddress, network, countStakedOnly, extra}) => {
   const tokenType = await getTokenType(tokenAddress, network);
+  console.log(tokenType)
   return await tokenType.getTokenBalance({keplrAccount, tokenAddress, network, countStakedOnly, extra});
 }
 
