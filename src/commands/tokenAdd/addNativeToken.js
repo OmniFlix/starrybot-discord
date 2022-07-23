@@ -14,10 +14,6 @@ module.exports = {
             next: `nativeToken${prefix.toUpperCase()}`,
             label: prefix.toUpperCase()
           })),
-          {
-            next: `nativeTokenSuggestion`,
-            label: '🙋🏽 Suggest another!'
-          }
         ]
       }
     })

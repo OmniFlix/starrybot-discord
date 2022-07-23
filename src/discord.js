@@ -63,7 +63,7 @@ const login = async () => {
 login().then((res) => {
   if (res) {
     logger.log('Connected to Discord')
-    client.user.setActivity('ya. starrybot.xyz', { type: 'LISTENING' })
+    client.user.setActivity('ya. starrybot', { type: 'LISTENING' })
   } else {
     logger.log('Issue connecting to Discord')
   }

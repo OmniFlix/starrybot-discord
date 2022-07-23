@@ -227,7 +227,7 @@ function registerStep(wizardware, mainCommand, command) {
 function buildCommandData(definedCommands, wizardware) {
   const mainCommand = new SlashCommandBuilder()
     .setName('starry')
-    .setDescription('Use starrybot (starrybot.xyz)');
+    .setDescription('Use starrybot');
   definedCommands.forEach(command => registerStep(wizardware, mainCommand, command));
   return mainCommand;
 }

@@ -15,6 +15,7 @@ module.exports = {
           description: 'A native token on a Cosmos chain',
           next: 'addNativeToken',
         },
+       /*
         {
           emoji: '📜',
           description: 'A cw20 fungible token',
@@ -25,8 +26,9 @@ module.exports = {
           description: 'A cw721 non-fungible token (Beta)',
           next: 'addCW721',
         },
+        */
         {
-          emoji: '🔥',
+          emoji: '🖼',
           description: 'An Omniflix non-fungible token',
           next: 'addONFT',
         },
