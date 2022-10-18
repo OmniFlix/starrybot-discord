@@ -3,7 +3,7 @@
 const { addONFT } = require('./addONFT');
 const { addNativeToken } = require('./addNativeToken');
 // const { daoDao } = require('./daoDao');
-const { explainTokenTypes } = require('./explainTokenTypes');
+// const { explainTokenTypes } = require('./explainTokenTypes');
 // const { handleCW20Entry } = require('./handleCW20Entry');
 // const { handleCW721Entry } = require('./handleCW721Entry');
 const { handleONFTEntry } = require('./handleONFTEntry');
@@ -15,8 +15,7 @@ const { nativeTokenOMNIFLIX } = require('./nativeTokenOMNIFLIX');
 // const { needsCW20 } = require('./needsCW20');
 const { promptTokenAmount } = require('./promptTokenAmount');
 const { promptTokenName } = require('./promptTokenName');
-const { handleStakedOnlyNo } = require('./handleStakedOnlyNo');
-const { handleStakedOnlyYes } = require('./handleStakedOnlyYes');
+const { handleRoleCreate } = require('./handleRoleCreate');
 // const { stargaze } = require('./stargaze');
 
 module.exports = {
@@ -25,12 +24,12 @@ module.exports = {
     name: 'add',
     description: 'Add a new token rule',
     prompt: {
-      type: 'reaction',
+      type: 'select',
       title: 'What kind of token?',
       options: [
         {
-          emoji: '🔗',
-          description: 'A native token on a Cosmos chain',
+          label: '🔗 Native Token',
+          description: 'E.g. Juno for the Juno chain.',
           next: 'addNativeToken',
         },
  /*       {
@@ -45,14 +44,9 @@ module.exports = {
         },*/
 
         {
-          emoji: '🖼',
+          label: '🖼 OmniFlix NFT',
           description: 'An OmniFlix non-fungible token',
           next: 'addONFT',
-        },
-        {
-          emoji: '⁉',
-          description: 'Huh? I\'m confused.',
-          next: 'explainTokenTypes',
         }
       ]
     },
@@ -75,8 +69,6 @@ module.exports = {
       promptTokenAmount,
       promptTokenName,
       // stargaze,
-      handleStakedOnlyNo,
-      handleStakedOnlyYes,
     }
   }
 }

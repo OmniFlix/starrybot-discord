@@ -1,19 +1,24 @@
 'use strict';
 
-const { Client, Collection, Intents } = require('discord.js')
+const { Client, Collection, GatewayIntentBits } = require('discord.js')
 
 const db = require("./db")
 const logger = require("./logger")
 const {
   guildCreate,
   interactionCreate,
-  messageCreate,
   messageReactionAdd,
 } = require("./handlers")
 const { starryCommand } = require('./commands');
 
-const intents = new Intents([ Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS ]);
-const client = new Client({intents: intents })
+// List of intents: https://discord.com/developers/docs/topics/gateway#list-of-intents
+// Corresponds with client events: https://discord.js.org/#/docs/discord.js/stable/class/Client
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds, // Allows us to manage roles
+    GatewayIntentBits.GuildMessageReactions // Allows us to detect reactions
+  ]
+})
 
 /// Install commands
 client.commands = new Collection();
@@ -36,9 +41,6 @@ client.on("guildCreate", guildCreate);
 // Handler for discord bot messages being directly interacted with
 // (e.g. button press, commands used, replies in the command chain)
 client.on('interactionCreate', interactionCreate);
-
-// Handler for messages that may be responses to the command chain
-client.on('messageCreate', messageCreate);
 
 // Handler for emoji reactions on discord messages from our bot
 client.on('messageReactionAdd', messageReactionAdd );
@@ -63,7 +65,7 @@ const login = async () => {
 login().then((res) => {
   if (res) {
     logger.log('Connected to Discord')
-    client.user.setActivity('ya. starrybot', { type: 'LISTENING' })
+    client.user.setActivity('ya. starrybot ', { type: 'LISTENING' })
   } else {
     logger.log('Issue connecting to Discord')
   }
