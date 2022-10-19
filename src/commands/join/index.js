@@ -4,11 +4,11 @@ module.exports = {
     name: 'join',
     description: 'Get link to verify your account with Keplr',
     getConfig: async (
-      { guildId, userId: authorId },
-      {
-        db: { myConfig: { VALIDATOR: validatorURL } },
-        logic: { hoistRequest }
-      }
+        { guildId, userId: authorId },
+        {
+          db: { myConfig: { VALIDATOR: validatorURL } },
+          logic: { hoistRequest }
+        }
     ) => {
       try {
         let results = await hoistRequest({ guildId, authorId });
@@ -21,7 +21,7 @@ module.exports = {
           return {
             ephemeral: true,
             done: {
-              author: [`starrybot`],
+              author: { name: `starrybot` },
               description: results.saganism,
               title: `Please visit ${url}`,
               thumbnailUrl: 'https://starrybot.xyz/small-array-of-stars.gif',

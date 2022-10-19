@@ -21,7 +21,7 @@ module.exports = {
             // See which button they pressed based on the custom ID
             const countStakedOnly = (interactionTarget.customId === 'yes');
 
-
+            console.log("here")
             // Create role in Discord
             await guild.roles.create({name: selectedRoleName, position: 0});
 

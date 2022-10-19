@@ -7,14 +7,17 @@ const { addNativeToken } = require('./addNativeToken');
 // const { handleCW20Entry } = require('./handleCW20Entry');
 // const { handleCW721Entry } = require('./handleCW721Entry');
 const { handleONFTEntry } = require('./handleONFTEntry');
-const { hasCW20 } = require('./hasCW20');
+// const { hasCW20 } = require('./hasCW20');
 // const { hasCW721 } = require('./hasCW721');
 const { hasONFT } = require('./hasONFT');
 const { nativeTokenOMNIFLIX } = require('./nativeTokenOMNIFLIX');
 // const { nativeTokenSuggestion } = require('./nativeTokenSuggestion');
 // const { needsCW20 } = require('./needsCW20');
+const { promptNativeToken } = require('./promptNativeToken');
 const { promptTokenAmount } = require('./promptTokenAmount');
 const { promptTokenName } = require('./promptTokenName');
+const { promptONFT } = require('./promptONFT');
+const { createTokenRule } = require('./createTokenRule');
 const { handleRoleCreate } = require('./handleRoleCreate');
 // const { stargaze } = require('./stargaze');
 
@@ -56,7 +59,7 @@ module.exports = {
       addONFT,
       addNativeToken,
       // daoDao,
-      explainTokenTypes,
+      // explainTokenTypes,
       // handleCW20Entry,
       // handleCW721Entry,
       handleONFTEntry,
@@ -66,9 +69,13 @@ module.exports = {
       nativeTokenOMNIFLIX,
       // nativeTokenSuggestion,
       // needsCW20,
+      // stargaze,
+      promptONFT,
+      promptNativeToken,
       promptTokenAmount,
       promptTokenName,
-      // stargaze,
+      createTokenRule,
+      handleRoleCreate,
     }
   }
 }

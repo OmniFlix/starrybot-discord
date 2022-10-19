@@ -4,7 +4,7 @@ module.exports = {
         getConfig: async (state, {
             astrolabe: { getTokenDetails },
             daodao: { isDaoDaoAddress, getCW20InputFromDaoDaoDao },
-            stargaze: { isStargazeLaunchpadAddress, getCW721FromStargazeUrl },
+            omniflix: { isOmniFlixCollectionAddress, getCollectionFromOmniFlixUrl },
         }) => {
             // Required for every flow in token-rule add
             const selectedRoleName = state.interactionTarget.fields.getTextInputValue('role-name');
@@ -13,23 +13,29 @@ module.exports = {
             if (state.tokenType !== 'native') {
                 tokenAddress = state.interactionTarget.fields.getTextInputValue('token-address');
                 if (tokenAddress) {
+                    console.log(tokenAddress);
                     try {
                         if (isDaoDaoAddress(tokenAddress)) {
                             const daoDetails = await getCW20InputFromDaoDaoDao(tokenAddress);
                             tokenAddress = daoDetails.govToken
                             state.stakingContract = daoDetails.stakingContract;
-                        } else if (isStargazeLaunchpadAddress(tokenAddress)) {
-                            tokenAddress = await getCW721FromStargazeUrl(tokenAddress);
+                        } else if (isOmniFlixCollectionAddress(tokenAddress)) {
+                            tokenAddress = await getCollectionFromOmniFlixUrl(tokenAddress);
                         }
-                        const results = await getTokenDetails({ tokenAddress });
 
-                        // TO-DO: This is silly, but currently works because native token rules
-                        // don't go through this if statement.
-                        state.tokenAddress = results.tokenType === 'cw20' ? results.cw20Input : results.cw721;
-                        state.network = results.network;
-                        state.tokenType = results.tokenType;
-                        state.tokenSymbol = results.tokenSymbol;
-                        state.decimals = results.decimals;
+                        if (tokenAddress) {
+                            const results = await getTokenDetails({tokenAddress});
+
+                            // TO-DO: This is silly, but currently works because native token rules
+                            // don't go through this if statement.
+                            state.tokenAddress = results.tokenType === 'cw20' ? results.cw20Input : results.onft;
+                            state.network = results.network;
+                            state.tokenType = results.tokenType;
+                            state.tokenSymbol = results.tokenSymbol;
+                            state.decimals = results.decimals;
+                        } else {
+                            throw Error("invalid token address");
+                        }
                     } catch (error) {
                         // Notify the channel with whatever went wrong in this step
                         return { error };
@@ -40,7 +46,7 @@ module.exports = {
 
             // This is set for native and cw20 only
             let amountOfTokensNeeded;
-            if (state.tokenType !== 'cw721') {
+            if (state.tokenType === 'native' || state.tokenType === 'cw20') {
                 amountOfTokensNeeded = parseInt(state.interactionTarget.fields.getTextInputValue('token-amount'));
 
                 // TODO: add fix so they can enter .1 instead of 0.1 and have it work

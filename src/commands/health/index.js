@@ -4,11 +4,11 @@ module.exports = {
     name: 'health',
     description: 'Run diagnostics for starrybot',
     getConfig: async (
-      { guild },
-      {
-        db: { rolesGet, syncDetails },
-        networks: { checkRPCStatus, checkLCDStatus, networkInfo }
-      }
+        { guild },
+        {
+          db: { rolesGet, syncDetails },
+          networks: { checkRPCStatus, checkLCDStatus, networkInfo }
+        }
     ) => {
       async function checkRPC(networkName, networkUrl) {
         const prefix = `${networkName} RPC status:`
@@ -131,7 +131,9 @@ module.exports = {
               value: syncResults,
             },
           ],
-          footer: `If there are any 🔴 above, please note that starrybot may not work as expected!`,
+          footer: {
+            text: `If there are any 🔴 above, please note that starrybot may not work as expected!`,
+          }
         }
       }
     }

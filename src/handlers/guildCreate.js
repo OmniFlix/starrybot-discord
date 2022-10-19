@@ -1,5 +1,5 @@
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const db = require("../db");
 const { myConfig } = db;
 const { starryCommand } = require("../commands");
@@ -16,8 +16,8 @@ async function registerGuildCommands(appId, guildId) {
   // https://discord.com/developers/docs/interactions/application-commands#example-walkthrough
   // TODO try catch
   await rest.put(
-    Routes.applicationGuildCommands(appId, guildId),
-    { body: [starryCommand.data.toJSON()] }
+      Routes.applicationGuildCommands(appId, guildId),
+      { body: [starryCommand.data.toJSON()] }
   );
 
   // Slash command are added successfully, double-check then tell the channel it's ready
@@ -39,8 +39,12 @@ async function guildCreate(guild) {
       systemChannelId = existingStarryBotChannel.id
     } else {
       // Did not find an existing channel, create one
-      const creationRes = await guild.channels.create('starrybot')
-      systemChannelId = creationRes.id
+      try {
+        const creationRes = await guild.channels.create('starrybot')
+        systemChannelId = creationRes.id
+      } catch (e) {
+        console.error(`Could not create starrybot channel for guild`, guild)
+      }
     }
   }
 
@@ -52,7 +56,9 @@ async function guildCreate(guild) {
         createEmbed({
           title: 'Hello friends!',
           description: 'starrybot just joined',
-          footer: 'Feel free to use the /starry join command.'
+          footer: {
+            text: 'Feel free to use the /starry join command.'
+          }
         })
       ]
     })
@@ -65,5 +71,5 @@ async function guildCreate(guild) {
 }
 
 module.exports = {
-    guildCreate,
+  guildCreate,
 }
