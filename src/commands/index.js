@@ -17,6 +17,7 @@ const db = require("../db");
 const logic = require("../logic");
 const networks = require("../astrolabe/networks");
 const stargaze = require("../astrolabe/stargaze");
+const omniflix = require("../astrolabe/omniflix");
 
 const wizardware = new Wizardware({
 
@@ -27,7 +28,8 @@ const wizardware = new Wizardware({
     db,
     logic,
     networks,
-    stargaze
+    stargaze,
+    omniflix,
   }
 })
 

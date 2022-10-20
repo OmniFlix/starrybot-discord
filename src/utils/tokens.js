@@ -6,8 +6,8 @@ const sumDelegationsForAccount = async (address) => {
   const delegationRes = await fetch(`${lcdUrl}/staking/delegators/${address}/delegations`)
   const body = await delegationRes.json();
   const sum = body.result.reduce(
-    (prevVal, currentVal) => prevVal + parseInt(currentVal.balance.amount),
-    0
+      (prevVal, currentVal) => prevVal + parseInt(currentVal.balance.amount),
+      0
   );
 
   console.log('Sum of delegations', sum)

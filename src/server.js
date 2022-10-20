@@ -64,7 +64,7 @@ app.get('/metrics', async (req, res) => {
 
 // TODO arguably config could be separate from db so that db would not need to be included here
 const PORT = db.myConfig.PORT || process.env.PORT || 80;
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   logger.info(`App listening on port ${PORT}`)
 })
 

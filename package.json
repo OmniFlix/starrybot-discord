@@ -16,7 +16,7 @@
 			"name": "@sudovickili"
 		}
 	],
-	"repository": "https://github.com/starryzone/starrybot-discord.git",
+	"repository": "https://github.com/OmniFlix/starrybot-discord.git",
 	"engines": {
 		"node": ">=14.0.0"
 	},
@@ -26,16 +26,16 @@
 		"@cosmjs/crypto": "^0.26.4",
 		"@cosmjs/encoding": "^0.26.4",
 		"@cosmjs/stargate": "^0.26.5",
-		"@discordjs/builders": "^0.9.0",
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"@google-cloud/logging-winston": "^4.0.0",
 		"cors": "^2.8.5",
-		"discord-api-types": "^0.25.2",
-		"discord.js": "^13.3.1",
+		"discord-api-types": "^0.37.11",
+		"discord.js": "^14.3.0",
 		"dotenv": "^14.3.2",
 		"express": "^4.17.1",
 		"knex": "^0.95.14",
 		"node-fetch": "^2.6.6",
+		"omniflix-nfts": "^1.0.2",
 		"pg": "^8.7.1",
 		"web-vitals": "^1.0.1",
 		"winston": "^3.1.0"

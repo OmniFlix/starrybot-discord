@@ -177,6 +177,7 @@ async function addRemoveRoles(discordUserId, discordGuildId, cosmosAddress, clie
       if (countStakedOnly) {
         balance = await getStakedTokenBalance({keplrAccount: cosmosAddress, tokenAddress, network, extra: { staking_contract: role.staking_contract }});
       } else {
+        console.log(cosmosAddress, tokenAddress, network)
         balance = await getTokenBalance({keplrAccount: cosmosAddress, tokenAddress, network, extra: { staking_contract: role.staking_contract }});
       }
     } catch(e) {

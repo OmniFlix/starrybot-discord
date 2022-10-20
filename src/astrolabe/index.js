@@ -1,13 +1,14 @@
 const { cw20 } = require('./tokens/cw20');
 const { cw721 } = require('./tokens/cw721');
 const { native } = require('./tokens/native');
+const { onft } = require("./tokens/onft");
 
 // cw20 must be last right now, as the others are
 // easier to check for
 // @to-do 🚧: move cw721 in front of cw20 when we've identified
 // how to recognize an address is for a collection instead
 // of a cw20
-const allTokenTypes = [ native, cw20, cw721 ];
+const allTokenTypes = [ native, cw20, cw721, onft ];
 
 // Given any of a DAODAO URL, CW20 token address, a native token, or an NFT
 // return the handler for that token type
@@ -44,6 +45,7 @@ const getTokenDetails = async ({tokenAddress, network}) => {
 
 const getTokenBalance = async ({keplrAccount, tokenAddress, network, countStakedOnly, extra}) => {
   const tokenType = await getTokenType(tokenAddress, network);
+  console.log(tokenType)
   return await tokenType.getTokenBalance({keplrAccount, tokenAddress, network, countStakedOnly, extra});
 }
 

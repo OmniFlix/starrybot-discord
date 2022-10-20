@@ -65,6 +65,8 @@ const getCW721TokenBalance = async ({keplrAccount, tokenAddress, network, extra}
   const nftInfo = await cosmClient.queryContractSmart(tokenAddress, {
     tokens: {
       owner: encodedAccount,
+      start_after: null,
+      limit: 100
     }
   });
 
@@ -77,9 +79,9 @@ const isCW721 = async (tokenAddress, network) => {
   // Expecting this format for tokenInfo.token:
   // { name: 'Passage Marketplace', symbol: 'yawp' }
   return tokenInfo.token &&
-    Object.keys(tokenInfo.token).length === 2 &&
-    tokenInfo.token.hasOwnProperty('name') &&
-    tokenInfo.token.hasOwnProperty('symbol');
+      Object.keys(tokenInfo.token).length === 2 &&
+      tokenInfo.token.hasOwnProperty('name') &&
+      tokenInfo.token.hasOwnProperty('symbol');
 }
 
 module.exports = {

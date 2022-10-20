@@ -4,15 +4,14 @@
 
 ### Discord Set-up
 * Choose an existing Discord Server or make a new Discord Server for local dev
-    * You must be an admin of this server, and starrybot must not be in there already
+  * You must be an admin of this server, and starrybot must not be in there already
 * Click on “New Application” in the [Discord Developer Portal](https://discord.com/developers/applications)
-* Go to the “Bot” tab and add a bot
-    * Scroll down to "Privileged Gateway Intents" and toggle the “Server Members Intent” on
-    * (Optional) Untoggle “Public Bot” if you don’t want anyone else adding your bot to discord servers in the meantime
-    * Save your changes
+* Go to the “Bot” tab and add a bot. Note: starrybot does _not_ need any Privileged Gateway Intents anymore!
+  * (Optional) Untoggle “Public Bot” if you don’t want anyone else adding your bot to discord servers in the meantime
+  * Save your changes
 
 ### Run the Bot Server
-* Run `nvm use`, or otherwise make sure you have node >= 16.6.0
+* Run `nvm use`, or otherwise make sure you have a node version >= what's in .nvmrc
 * Run `yarn install` in the root directory
 * Run `cp .env.template .env` to make your own copy of environment variables
 * Set `DISCORD_TOKEN` in `.env` to the token in the "Bot" tab
@@ -20,9 +19,15 @@
 
 ### Add your Bot to your Discord Server
 * Go to the "General" tab of your app in the Discord Developer Portal and copy the application ID
-* Go to `https://discord.com/oauth2/authorize?client_id=[your application ID]&scope=applications.commands%20bot&permissions=8`
-    * Follow the steps to authorize the bot
-    * You will need to kick the bot a lot for testing, so keep this URL around
+* Go to `https://discord.com/oauth2/authorize?client_id=[your application ID]&scope=applications.commands%20bot&permissions=268486720`
+  * This code gives the permissions for the bot to:
+    * Manage Roles (for /starry token-rule and join commands)
+    * Send Messages (for every slash command)
+    * Embed Links (for /starry join)
+    * Attach Files (for /starry export)
+    * Add Reactions (for /starry token-rule commands)
+  * Follow the steps to authorize the bot
+  * You will need to kick the bot a lot for testing, so keep this URL around
 * Your bot should be successfully added to the server!
 * Follow the steps in the welcome message to re-authorize the bot to enable slash commands
 
@@ -38,12 +43,12 @@
 * (If prompted by a bot) Verify yourself via the DMed instructions
 * Open the Keplr Chrome extension (top bar)
 
-    * Hit the dropdown that says “Cosmo”
-    * Scroll down to the bottom and click on “Juno Testnet”
+  * Hit the dropdown that says “Cosmo”
+  * Scroll down to the bottom and click on “Juno Testnet”
 * Click on the `junoxyz...` string under your Keplr wallet name to copy the Juno Testnet address
 * Paste `$request [your Juno Testnet address]` in #faucet
-    * You don’t need to keep the ID in the response - you can always get it later and it doesn’t work the same on testnet anyways
-    * You can run this command after some delay (hours/days) to get more for testing if needed
+  * You don’t need to keep the ID in the response - you can always get it later and it doesn’t work the same on testnet anyways
+  * You can run this command after some delay (hours/days) to get more for testing if needed
 
 ---
 
@@ -75,7 +80,7 @@ Props to Todd Wallar for the fun project https://github.com/omniverse/saganipsum
 
 ## TODO
 
-- add a kick command 
+- add a kick command
 
 - examine the overall flow
 - the web page could actually be merged into this back end
