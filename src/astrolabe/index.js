@@ -13,10 +13,15 @@ const allTokenTypes = [ native, cw20, cw721, onft ];
 // Given any of a DAODAO URL, CW20 token address, a native token, or an NFT
 // return the handler for that token type
 const getTokenType = async (tokenInput) => {
-  for (const tokenType of allTokenTypes) {
-    const isType = await tokenType.isTokenType(tokenInput)
-    if (isType) return tokenType
-  }
+   for (const tokenType of allTokenTypes) {
+     try {
+       const isType = await tokenType.isTokenType(tokenInput)
+       if (isType) return tokenType
+     } catch (e){
+       continue;
+     }
+   }
+  return;
 }
 
 // Identify what type of token we have, then call
