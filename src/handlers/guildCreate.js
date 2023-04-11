@@ -47,8 +47,11 @@ async function guildCreate(guild) {
       }
     }
   }
-
-  let systemChannel = await client.channels.fetch(systemChannelId);
+  try {
+      let systemChannel = await client.channels.fetch(systemChannelId);
+  } catch(e) {
+      console.warn(e);
+  }
   try {
     await registerGuildCommands(client.application.id, guild.id);
     systemChannel.send({
@@ -65,7 +68,7 @@ async function guildCreate(guild) {
   } catch (e) {
     if (e) {
       console.warn(e);
-      systemChannel.send('Commands could not be added :(\n Please try kicking and reinstalling starrybot again: https://starrybot.xyz/');
+      // systemChannel.send('Commands could not be added :(\n Please try kicking and reinstalling starrybot again: https://starrybot.xyz/');
     }
   }
 }
